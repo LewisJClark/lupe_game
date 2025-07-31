@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Flower : Node2D
+public class Flower : Entity
 {
     public event Action AllPetalsRemoved;
     

@@ -1,21 +1,16 @@
 using Godot;
 using System;
 
-public class Thorn : Node2D
+public class Thorn : Obstacle
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        
+        var sprite = GetNode<Node2D>("Sprite");
+
+        sprite.Scale = new Vector2(0.5f, 1.5f);
+
+        var spawnTween = CreateTween().SetTrans(Tween.TransitionType.Elastic).SetEase(Tween.EaseType.Out);
+        spawnTween.TweenProperty(sprite, "scale", Vector2.One, 0.4f);
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }
