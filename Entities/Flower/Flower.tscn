@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Entities/frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Entities/Flower/Flower.cs" type="Script" id=2]
+[ext_resource path="res://Entities/Flower/Petal.tscn" type="PackedScene" id=3]
+
+[node name="Flower" type="Node2D"]
+script = ExtResource( 2 )
+_petalScene = ExtResource( 3 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "flower"
+centered = false
+
+[node name="Petals" type="Node2D" parent="."]
+show_behind_parent = true
+position = Vector2( 8, 8 )
