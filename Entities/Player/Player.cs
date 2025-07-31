@@ -8,7 +8,7 @@ public class Player : Entity
     private Vector2 _spawnPosition;
     private SceneTreeTween _movementTween;
 
-    private HashSet<Vector2> _visitedCells = new HashSet<Vector2>();
+    private Stack<Vector2> _directionInput = new Stack<Vector2>();
 
     public override void _Ready()
     {
@@ -56,7 +56,15 @@ public class Player : Entity
         }
 
         StartMoveTween(CellTransform.CellToWorld(targetCellPosition));
-        _visitedCells.Add(targetCellPosition);
+        StoreDirectionInput(direction);
+    }
+
+    private void StoreDirectionInput(Vector2 direction)
+    {
+        if (_directionInput.Count > 0 && _directionInput.Peek() == -direction)
+            _directionInput.Pop();
+        else
+            _directionInput.Push(direction);
     }
 
     private void NextLoop()
@@ -65,6 +73,25 @@ public class Player : Entity
 
         // TODO: cooler reset animation
         StartMoveTween(_spawnPosition);
+    }
+
+    private void SpawnThorns()
+    {
+        var cellPosition = CellTransform.WorldToCell(_spawnPosition);
+        var path = _directionInput.ToArray();
+
+        for (int i = path.Length - 1; i >= 0; i--)
+        {
+            var direction = path[i];
+
+            cellPosition += direction;
+
+            var newThorn = _thornScene.Instance<Thorn>();
+            newThorn.CellTransform.MoveTo(cellPosition);
+            Level.Current.AddEntity(newThorn);
+        }
+
+        _directionInput.Clear();
     }
 
     private void StartMoveTween(Vector2 targetPosition)
@@ -83,15 +110,4 @@ public class Player : Entity
         _movementTween.TweenCallback(this, "FinishTween");
     }
     private void FinishTween() => _movementTween = null;
-
-    private void SpawnThorns()
-    {
-        foreach (var cell in _visitedCells)
-        {
-            var newThorn = _thornScene.Instance<Thorn>();
-            newThorn.CellTransform.MoveTo(cell);
-            Level.Current.AddEntity(newThorn);
-        }
-        _visitedCells.Clear();
-    }
 }

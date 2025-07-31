@@ -5,7 +5,7 @@ public class CellTransform
 {
     public const int CELL_SIZE = 16;
 
-    public Vector2 Position => _entity.Position / CELL_SIZE;
+    public Vector2 Position => WorldToCell(_entity.Position);
 
     private readonly Node2D _entity;
 
@@ -22,5 +22,9 @@ public class CellTransform
     public static Vector2 CellToWorld(Vector2 cellPosition)
     {
         return cellPosition * CELL_SIZE;
+    }
+    public static Vector2 WorldToCell(Vector2 cellPosition)
+    {
+        return cellPosition / CELL_SIZE;
     }
 }
