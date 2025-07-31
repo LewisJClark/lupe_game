@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Entities/frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Entities/Player/Player.cs" type="Script" id=2]
+[ext_resource path="res://Entities/Thorn/Thorn.tscn" type="PackedScene" id=3]
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 2 )
+_thornScene = ExtResource( 3 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
