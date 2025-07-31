@@ -12,7 +12,7 @@ Height = 3
 
 [node name="Flower" parent="." instance=ExtResource( 4 )]
 position = Vector2( 16, 0 )
-_numberOfPetals = 2
+_petalScene = null
 
 [node name="Obstacle" parent="." instance=ExtResource( 5 )]
 position = Vector2( 16, 16 )

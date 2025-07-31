@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/MainMenu/MainMenu.cs" type="Script" id=1]
+[ext_resource path="res://UI/LevelSelect/LevelSelect.tscn" type="PackedScene" id=2]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+_levelSelectScene = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 135.0
+margin_top = 70.0
+margin_right = 175.0
+margin_bottom = 84.0
+text = "LUPE"
+align = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 92.0
+margin_top = 103.0
+margin_right = 221.0
+margin_bottom = 117.0
+text = "Press SPACE to play."
